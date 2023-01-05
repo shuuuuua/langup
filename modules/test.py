@@ -8,5 +8,5 @@ source_sentence = """The virus is no more deadly than a cold, but vaccines are e
 
 voice = Text2Voice.Text2Voice.text2voice(source_sentence, wpm=140, source_lang='us', speaker_gender='NEUTRAL')
 
-with open('text.mp3', 'w') as f:
+with open('test.mp3', 'wb') as f:
     f.write(voice)

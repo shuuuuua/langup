@@ -2,15 +2,22 @@
 import os
 
 from flask import Flask, render_template, request
-import urllib3
+#import urllib3
 
 app = Flask(__name__)
 
-@app.route("/")
-#@app.route("/<id>", methods=['GET', 'POST'])
-def show_menu():
-
+@aap.route("/")
+def menu():
     return render_template('index.html')
+
+@app.route("/shadowing_list")
+def shadowing_list():
+
+    return render_template('shadowing_list.html')
+
+@app.route("/shadowing/<id>", methods=['GET'])
+def shadowing():
+    return render_template('shadowing.html')
 
 @app.route("/check", methods=['POST'])
 def cehck():
@@ -24,14 +31,6 @@ def cehck():
         return show(new_id)
     else:
         return show(id, mistake=True)
-
-@app.route("/search")
-def search():
-    return render_template('search.html')
-
-@app.route("/test")
-def test():
-    return render_template('test.html')
 
 if __name__ == "__main__":
     #app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
