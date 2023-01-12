@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<table class="table table-bordered" id="shadowingListTable" width=100% cellspacing="1">
+<tbody>
+{% for name in mp3_list %}
+<tr>
+<td><a href="{{ name }}">{{ name }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

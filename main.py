@@ -2,18 +2,23 @@
 import os
 
 from flask import Flask, render_template, request
-#import urllib3
+from google.cloud import storage
 
 app = Flask(__name__)
 
-@aap.route("/")
+@app.route("/")
 def menu():
     return render_template('index.html')
 
 @app.route("/shadowing_list")
 def shadowing_list():
 
-    return render_template('shadowing_list.html')
+    shadowing_materials_bucket_name = 'langup-shadowing_stuff'
+    storage_client = storage.Client()
+    blobs = storage_client.list_blobs(shadowing_materials_bucket_name, prefix='voices/')
+    mp3_list = [blob.name for blob in blobs if blob.name.endswith('.mp3')]
+    
+    return render_template('shadowing_list.html', mp3_list)
 
 @app.route("/shadowing/<id>", methods=['GET'])
 def shadowing():
