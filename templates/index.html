@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
-{% block body %}
+{% block main %}
+<h1>Menu</h1>
 
+<table class="table table-bordered" id="MenuTable" width=100% cellspacing="1">
+<tbody>
+<tr>
+<td><a href="{{ url_for('shadowing_list') }}">Shadowing</td>
+<td><a href="{{ url_for('flash_speaking') }}">Flash speaking</td>
+</tr>
+</tbody>
+</table>
+    
 {% endblock %}

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h1>Shadowing List</h1>
+<h1>Flash Speaking</h1>
 <table class="table table-bordered" id="shadowingListTable" width=100% cellspacing="1">
 <tbody>
-{% for name in mp3_list %}
+{% for category in categories %}
 <tr>
-<td><a href="{{ name }}">{{ name }}</td>
+<td><a href="{{ url_for('flash_speaking_play', category='Business1-3', marked=1, idx=0) }}">{{ category }}</a></td>
 </tr>
 {% endfor %}
 </tbody>

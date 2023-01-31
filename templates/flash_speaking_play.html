@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1>Flash Speaking Play</h1>
+<script>
+var jp_sentence = {{ sentence.1|tojson }};
+var next_idx = {{ idx }} + 1
+window.onload = function() {
+    setTimeout(function() {
+        document.getElementById('jp').textContent = jp_sentence;
+        setTimeout(function() {
+            window.location.href = './' + next_idx;
+        }, 5000)
+    }, 3000);
+}
+</script>
+<h2>{{ sentence.0 }}</h2>
+<h2><span id='jp'></span></h2>
+
+{% endblock %}
