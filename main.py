@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, redirect, url_for
 from google.cloud import storage
 
 app = Flask(__name__)
@@ -42,10 +42,10 @@ def flash_speaking_play(category, marked=1, idx=0):
         if marked and items[3] is None:
             continue
         sentences.append((items[0], items[1]))
-    if idx > len(sentences):
-        return render_template('flash_speaking.html', categories=categories)
-    else:
+    if idx < len(sentences):
         return render_template('flash_speaking_play.html', sentence=sentences[idx], marked=marked, idx=idx)
+    else:
+        return redirect(url_for('flash_speaking'))
 
 @app.route("/check", methods=['POST'])
 def cehck():
