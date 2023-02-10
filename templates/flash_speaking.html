@@ -6,7 +6,7 @@
 <tbody>
 {% for category in categories %}
 <tr>
-<td><a href="{{ url_for('flash_speaking_play', category='Business1-3', marked=1, idx=0) }}">{{ category }}</a></td>
+<td><a href="{{ url_for('flash_speaking_category', category=category) }}">{{ category }}</a></td>
 </tr>
 {% endfor %}
 </tbody>

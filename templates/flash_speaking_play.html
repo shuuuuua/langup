@@ -11,7 +11,7 @@ window.onload = function() {
         timerId = setTimeout(function() {
             window.location.href = './' + nextIdx;
         }, 5000)
-    }, 3000);
+    }, 7000);
 }
 
 function stopTimer() {
@@ -27,6 +27,8 @@ function nextSentence() {
 </script>
 
 <div class="col text-center m-3 p-3">
+<p>{{ idx }} / {{ total }}</p>
+<p>{{ sentence.2 }} - {{ sentence.3}}</p>
 <p>{{ sentence.0 }}</p>
 <p><span id='jp'></span></p>
 <button id="stopTimerButton" type="button" class="btn btn-secondary" onClick="stopTimer()">
