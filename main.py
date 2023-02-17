@@ -11,9 +11,9 @@ app = Flask(__name__)
 random_seed = 0
 flash_speaking_sentences = {}
 
-@functions_framework.http
-#@app.route("/")
-def menu(request):
+#@functions_framework.http
+@app.route("/")
+def menu():
     return render_template('index.html')
 
 @app.route("/shadowing_list")
@@ -69,6 +69,7 @@ def flash_speaking_play(category, marked=1, idx=1):
     sentences = [sentence for sentence in flash_speaking_sentences[category] if marked and sentence[4] == '1']
     #print(sentences)
 
+    random.seed(random_seed)
     random.shuffle(sentences)
     total = len(sentences)
     if idx - 1 < total:
