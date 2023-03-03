@@ -71,7 +71,6 @@ def flash_speaking_play(category, marked=1, idx=1):
 
     random.seed(random_seed)
     random.shuffle(sentences)
-    print(sentences[0])
     total = len(sentences)
     if idx - 1 < total:
         return render_template('flash_speaking_play.html', sentence=sentences[idx-1], marked=marked, idx=idx, total=total)
