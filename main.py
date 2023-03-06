@@ -32,7 +32,7 @@ def shadowing():
 
 @app.route("/flash_speaking")
 def flash_speaking():
-    categories = ['Business1-1', 'Business1-2', 'Business1-3-1', 'Advance1-1-1', 'Advance1-1-2']
+    categories = ['Business1-1', 'Business1-2', 'Business1-3-1', 'Advance1-1-1', 'Advance1-1-2', 'Advance1-1-3']
     return render_template('flash_speaking.html', categories=categories)
 
 @app.route("/flash_speaking_category/<string:category>")
@@ -71,7 +71,7 @@ def flash_speaking_play(category, marked=1, idx=1):
 
     random.seed(random_seed)
     random.shuffle(sentences)
-    total = len(sentences)
+    total = min((len(sentences), 60))
     if idx - 1 < total:
         return render_template('flash_speaking_play.html', sentence=sentences[idx-1], marked=marked, idx=idx, total=total)
     else:
