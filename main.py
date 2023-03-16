@@ -32,11 +32,13 @@ def shadowing():
 
 @app.route("/flash_speaking")
 def flash_speaking():
-    categories = ['Business1-1', 'Business1-2', 'Business1-3-1', 'Advance1-1-1', 'Advance1-1-2', 'Advance1-1-3']
+    categories = ['Business1-1', 'Business1-2', 'Business1-3-1', 'Advance1-1-1', 'Advance1-1-2', 'Advance1-1-3',
+                  'Advance1-2-1']
     return render_template('flash_speaking.html', categories=categories)
 
 @app.route("/flash_speaking_category/<string:category>")
 def flash_speaking_category(category):
+    global flash_speaking_sentences
     if category in flash_speaking_sentences.keys():
         pass
     else:
@@ -59,10 +61,10 @@ def flash_speaking_category(category):
 
 @app.route("/flash_speaking_play/<string:category>/<int:marked>/<int:idx>")
 def flash_speaking_play(category, marked=1, idx=1):
-    flash_speaking_bucket_name = 'langup-flash-speaking'
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(flash_speaking_bucket_name)
-    blob_contents = bucket.blob(category + '.tsv').download_as_text()
+    #flash_speaking_bucket_name = 'langup-flash-speaking'
+    #storage_client = storage.Client()
+    #bucket = storage_client.bucket(flash_speaking_bucket_name)
+    #blob_contents = bucket.blob(category + '.tsv').download_as_text()
 
     if category not in flash_speaking_sentences.keys():
         return redirect(url_for('flash_speaking_category', category=category))

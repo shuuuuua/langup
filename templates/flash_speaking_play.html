@@ -2,12 +2,14 @@
 
 {% block main %}
 <script>
-var sentenceJP = {{ sentence.1|tojson }};
+var sentenceEn = {{ sentence.1|tojson }};
 var nextIdx = {{ idx }} + 1;
 var timerId;
+var enShowed = false;
 window.onload = function() {
     timerId = setTimeout(function() {
-        document.getElementById('jp').textContent = sentenceJP;
+        document.getElementById('en').textContent = sentenceEn;
+	enShowed = true;
         timerId = setTimeout(function() {
             window.location.href = './' + nextIdx;
         }, 7000)
@@ -16,15 +18,18 @@ window.onload = function() {
 
 function stopTimer() {
     clearTimeout(timerId);
-    stopTimerButton = document.getElementById('stopTimerButton')
-    //stopTimerButton.textContent = "Next";
-    stopTimerButton.textContent = "Show";
-    //stopTimerButton.onclick = nextSentence;
-    stopTimerButton.onclick = showEnglishSentence;
+    stopTimerButton = document.getElementById('stopTimerButton');
+    if (enShowed) {
+        stopTimerButton.textContent = "Next";
+        stopTimerButton.onclick = nextSentence;
+    } else {
+        stopTimerButton.textContent = "Show";
+        stopTimerButton.onclick = showEnglishSentence;
+    }
 }
 
 function showEnglishSentence() {
-    document.getElementById('jp').textContent = sentenceJP;
+    document.getElementById('en').textContent = sentenceEn;
     stopTimerButton.textContent = "Next";
     stopTimerButton.onclick = nextSentence;
 }
@@ -38,7 +43,7 @@ function nextSentence() {
 <p>{{ idx }} / {{ total }}</p>
 <p>{{ sentence.2 }} - {{ sentence.3}}</p>
 <p>{{ sentence.0 }}</p>
-<p class="text-success fs-5"><span id='jp'></span></p>
+<p class="text-success fs-5"><span id='en'></span></p>
 <button id="stopTimerButton" type="button" class="btn btn-secondary" onClick="stopTimer()">
     <i id="pauseButtonIcon" class="bi bi-pause-fill"></i> Pause</button>
 <button id="flash_speaking_menu" type="button" class="btn btn-secondary" onClick="location.href='{{ url_for('flash_speaking')}}'">Menu</div>
