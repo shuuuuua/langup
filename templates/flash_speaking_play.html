@@ -9,7 +9,7 @@ var enShowed = false;
 window.onload = function() {
     timerId = setTimeout(function() {
         document.getElementById('en').textContent = sentenceEn;
-	enShowed = true;
+	    enShowed = true;
         timerId = setTimeout(function() {
             window.location.href = './' + nextIdx;
         }, 7000)
@@ -41,7 +41,7 @@ function nextSentence() {
 
 <div class="col text-center m-3 p-3">
 <p>{{ idx }} / {{ total }}</p>
-<p>{{ sentence.2 }} - {{ sentence.3}}</p>
+<p>{{ sentence.2 }}</p>
 <p>{{ sentence.0 }}</p>
 <p class="text-success fs-5"><span id='en'></span></p>
 <button id="stopTimerButton" type="button" class="btn btn-secondary" onClick="stopTimer()">

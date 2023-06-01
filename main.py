@@ -8,7 +8,7 @@ from google.cloud import storage
 
 app = Flask(__name__)
 
-random_seed = 0
+#random_seed = 0
 flash_speaking_sentences = {}
 
 #@functions_framework.http
@@ -33,15 +33,14 @@ def shadowing():
 @app.route("/flash_speaking")
 def flash_speaking():
     categories = ['Business1-1', 'Business1-2', 'Business1-3-1', 'Advance1-1-1', 'Advance1-1-2', 'Advance1-1-3',
-                  'Advance1-2-1', 'Advance1-2-2', 'BuildingVocabulary-01']
+                  'Advance1-2-1', 'Advance1-2-2', 'Advance1-3-1', 'Advance1-3-2', 
+                  'BuildingVocabulary-01', 'BuildingVocabulary-02', 'BuildingVocabulary-03']
     return render_template('flash_speaking.html', categories=categories)
 
 @app.route("/flash_speaking_category/<string:category>")
 def flash_speaking_category(category):
     global flash_speaking_sentences
-    if category in flash_speaking_sentences.keys():
-        pass
-    else:
+    if category not in flash_speaking_sentences.keys():
         flash_speaking_bucket_name = 'langup-flash-speaking'
         storage_client = storage.Client()
         bucket = storage_client.bucket(flash_speaking_bucket_name)
@@ -51,10 +50,11 @@ def flash_speaking_category(category):
         for line in blob_contents.split('\r\n'):
             items = line.split('\t')
             sentences.append(tuple(items))
-        flash_speaking_sentences[category] = sentences
+        random_seed = int(random.random() * 100)
+        flash_speaking_sentences[category] = (random_seed, sentences)
 
-    global random_seed
-    random_seed = int(random.random() * 100)
+    #global random_seed
+    #random_seed = int(random.random() * 100)
 
     return redirect(url_for('flash_speaking_play', category=category, marked=1, idx=1))
   
@@ -69,9 +69,9 @@ def flash_speaking_play(category, marked=1, idx=1):
     if category not in flash_speaking_sentences.keys():
         return redirect(url_for('flash_speaking_category', category=category))
 
-    sentences = [sentence for sentence in flash_speaking_sentences[category] if marked and sentence[4] == '1']
+    sentences = [sentence for sentence in flash_speaking_sentences[category][1] if marked and sentence[4] == '1']
 
-    random.seed(random_seed)
+    random.seed(flash_speaking_sentences[category][0])
     random.shuffle(sentences)
     total = min((len(sentences), 60))
     if idx - 1 < total:
