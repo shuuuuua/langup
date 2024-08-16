@@ -32,9 +32,10 @@ def shadowing():
 
 @app.route("/flash_speaking")
 def flash_speaking():
-    categories = ['Business1-1', 'Business1-2', 'Business1-3-1', 'Advance1-1-1', 'Advance1-1-2', 'Advance1-1-3',
-                  'Advance1-2-1', 'Advance1-2-2', 'Advance1-3-1', 'Advance1-3-2', 
-                  'BuildingVocabulary-01', 'BuildingVocabulary-02', 'BuildingVocabulary-03']
+    categories = ['BuildingVocabulary-01', 'BuildingVocabulary-02', 'BuildingVocabulary-03',
+                    'BuildingVocabulary-04', 'BuildingVocabulary-05', 'BuildingVocabulary-06',
+                    'BuildingVocabulary-07', 'BuildingVocabulary-08', 'BuildingVocabulary-09',
+                    'BuildingVocabulary-10']
     return render_template('flash_speaking.html', categories=categories)
 
 @app.route("/flash_speaking_category/<string:category>")
